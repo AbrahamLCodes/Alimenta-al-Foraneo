@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationView naviView;
     public SoundPool sp;
     public int flujoDeMusia = 0;
+    //------------------------------------------------------------------------
     Handler miHandler = new Handler(){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -38,11 +39,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             vida.setText(y+"%");
         }
     };
+    //-----------------------------------------------------------------
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       //handler
+       //------------------------------------------------------------
         //Thread
         final Thread miThread = new Thread(){
             @Override
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         miThread.start();
         Modelo modelo = new Modelo();
         modelo.Hilos();
-
+//------------------------------------------------------------------------------nuevo
         //Sonido
         sp = new SoundPool(8, AudioManager.STREAM_MUSIC,0);
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
