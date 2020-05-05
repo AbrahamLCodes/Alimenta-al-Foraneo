@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_papitas"
+        android:title="curitas" />
+    <item
+        android:id="@+id/item_caguamon"
+        android:title="peptoabismol" />
+    <item
+        android:id="@+id/item_maruchan"
+        android:title="Maruchan medicinal" />
+    <item
+        android:id="@+id/item_atun"
+        android:title="aspirinas" />
+    <item
+        android:id="@+id/item_nito"
+        android:title="fourloko medicinal" />
+
+</menu>

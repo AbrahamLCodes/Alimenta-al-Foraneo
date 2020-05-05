@@ -1,0 +1,2 @@
+rootProject.name='Alimenta_al_foráneo'
+include ':app'

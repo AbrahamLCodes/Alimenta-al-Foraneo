@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_papitas"
+        android:title="Papitas" />
+    <item
+        android:id="@+id/item_caguamon"
+        android:title="Caguamon" />
+    <item
+        android:id="@+id/item_maruchan"
+        android:title="Maruchan" />
+    <item
+        android:id="@+id/item_atun"
+        android:title="Atun" />
+    <item
+        android:id="@+id/item_nito"
+        android:title="Nito bimbo" />
+    <item
+        android:id="@+id/item_fourloko"
+        android:title="Fourloko" />
+    <item
+        android:id="@+id/item_cola"
+        android:title="Coca cola" />
+    <item
+        android:id="@+id/item_agua"
+        android:title="Agua" />
+</menu>
