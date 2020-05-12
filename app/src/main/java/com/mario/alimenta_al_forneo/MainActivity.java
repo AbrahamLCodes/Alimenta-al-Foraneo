@@ -1,11 +1,15 @@
 package com.mario.alimenta_al_forneo;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,75 +25,41 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CostumeDialog.CostumeDialogInterface {
     private static ImageView foraneo;
-    private ImageButton ajustes,inventario,otso,salud;
-    private TextView dinero,felicidad,hambre,vida,nombre;
+    private ImageButton ajustes, inventario, otso, salud;
+    private TextView txtdinero, txtfelicidad, txthambre, txtvida, txtnombre;
     private DrawerLayout mDrawerLayout;
     private NavigationView naviView;
+    private ProgressBar vidaBar,felcidadBar,hambreBar;
     public SoundPool sp;
+    private int vidaPoints,felicidadPoints,dinerocount;
+    private int hambrePoints;
     public int flujoDeMusia = 0;
-    //------------------------------------------------------------------------
-    Handler miHandler = new Handler(){
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            Bundle datos = msg.getData();
-            String s = datos.getString("key_palabra");
-            String x = datos.getString("hambre");
-            String y = datos.getString("vida");
-            felicidad.setText(s+"%");
-            hambre.setText(x+"%");
-            vida.setText(y+"%");
-        }
-    };
+    public boolean isRunning0 = true;
+    public boolean isRunning3 =true;
+    public boolean isRunning2 = true;
+
+
+
+
+
     //-----------------------------------------------------------------
-@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       //------------------------------------------------------------
-        //Thread
-        final Thread miThread = new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                int i =100;
-                int x= 100;
-                int y = 100;
-                while(true){
-                    try {
-                        if(i != 0)
-                        Thread.sleep(500);
-                        else{
-                            break;
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Message msg = new Message();
-                    Bundle datos = new Bundle();
-                    datos.putString("key_palabra", String.valueOf(i));
-                    datos.putString("hambre",String.valueOf(x));
-                    datos.putString("vida",String.valueOf(y));
-                    msg.setData(datos);
-                    miHandler.sendMessage(msg);
-                    Log.wtf("mihilo",i+"");
-                    i--;
-                    x--;
-                    y--;
-                }
 
-            }
-        };
-        miThread.start();
-        Modelo modelo = new Modelo();
-        modelo.Hilos();
-//------------------------------------------------------------------------------nuevo
+        vidaPoints =100;
+        felicidadPoints=100;
+        hambrePoints =100;
+
+
         //Sonido
-        sp = new SoundPool(8, AudioManager.STREAM_MUSIC,0);
+        sp = new SoundPool(8, AudioManager.STREAM_MUSIC, 0);
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        flujoDeMusia = sp.load(this,R.raw.click,1);
+        flujoDeMusia = sp.load(this, R.raw.click, 1);
         //Navaigation Drawer
         naviView = findViewById(R.id.naviVew);
-        mDrawerLayout  = findViewById(R.id.drawerLayout);
+        mDrawerLayout = findViewById(R.id.drawerLayout);
 
         /* images bottons */
 
@@ -105,30 +76,175 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         salud.setOnClickListener(this);
 
         /* txt views */
-        nombre = findViewById(R.id.txt_v_nombre);
-        dinero = findViewById(R.id.txt_view_dinero);
-        felicidad = findViewById(R.id.txt_v_happy);
-        hambre = findViewById(R.id.txt_v_comida);
-        vida = findViewById(R.id.txt_v_vida);
+        txtnombre = findViewById(R.id.txt_v_nombre);
+        txtdinero = findViewById(R.id.txt_view_dinero);
+        txtfelicidad = findViewById(R.id.txt_v_happy);
+        txthambre = findViewById(R.id.txt_v_comida);
+        txtvida = findViewById(R.id.txt_v_vida);
 
+        /* progressbars */
+         felcidadBar = findViewById(R.id.progressBar_felcidad);
+         vidaBar = findViewById(R.id.progressBar_vida);
+         hambreBar = findViewById(R.id.progressBar_hambre);
         /* images */
 
         foraneo = findViewById(R.id.img_foraneo);
 
+        new hilodinero().start();
+        new hilohambre().start();
+        new hilofelicidad().start();
+        new hilovida().start();
+
     }
-    public static void setForaneo(int f){
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    class hilovida extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            while(isRunning0){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(vidaPoints <= 0){
+                            vidaBar.setProgress(0);
+                            isRunning0=false;
+                            foraneo.setImageResource(R.drawable.foraneotriste);
+                        }
+                        else{
+                            if(hambrePoints == 0){
+                                vidaPoints--;
+                            }
+                            if(felicidadPoints < 30){
+                                vidaPoints--;
+                            }
+                            vidaBar.setProgress(vidaPoints);
+                            txtvida.setText(String.valueOf(vidaPoints+"%"));
+                        }
+                    }
+                });
+
+
+            }
+        }
+    }
+
+    class hilodinero extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            dinerocount=0;
+            for(int i=0; i<=100;i++){
+            try {
+                Thread.sleep(2000);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+
+            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    dinerocount++;
+                    txtdinero.setText(String.valueOf(dinerocount+"$"));
+
+                }
+            });
+        }
+        }
+    }
+
+    class hilohambre extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            while(isRunning2){
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(hambrePoints == 0){
+                            isRunning2 =false;
+                            vidaPoints--;
+                        }
+                        else{
+                            if(hambrePoints < 50){
+                                felicidadPoints--;
+                            }
+                            hambrePoints--;
+                            hambreBar.setProgress(hambrePoints);
+                            txthambre.setText(String.valueOf(hambrePoints+"%"));
+                        }
+                    }
+                });
+
+
+            }
+        }
+    }
+
+    class hilofelicidad extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            while(isRunning3){
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(felicidadPoints == 0){
+                            isRunning3 =false;
+                            vidaPoints--;
+                        }
+                        else{
+                            if(vidaPoints < 60){
+                                felicidadPoints--;
+                            }
+                            felcidadBar.setProgress(felicidadPoints);
+                            txtfelicidad.setText(String.valueOf(felicidadPoints+"%"));
+                        }
+                    }
+                });
+
+
+            }
+        }
+    }
+
+    protected void onResume() {
+        super.onResume();
+    }
+
+    public static void setForaneo(int f) {
 
         foraneo.setImageResource(f);
     }
 
     private void openDialog() {
         CostumeDialog costumeDialog = new CostumeDialog();
-        costumeDialog.show(getSupportFragmentManager(),"Costume Dialog");
+        costumeDialog.show(getSupportFragmentManager(), "Costume Dialog");
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.img_btn_farmacia:
                 play_sp();
                 naviView.getMenu().clear();
@@ -156,14 +272,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void play_sp(){
-        sp.play(flujoDeMusia,1,1,0,0,1);
+    private void play_sp() {
+        sp.play(flujoDeMusia, 1, 1, 0, 0, 1);
     }
+
     @Override
     public void apllytext(String Name) {
-        nombre.setText(Name);
+        txtnombre.setText(Name);
 
     }
-
 
 }
