@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/item_papitas"
-        android:title="Papitas" />
+        android:title="Papitas...........$15" />
     <item
         android:id="@+id/item_caguamon"
-        android:title="Caguamon" />
+        android:title="Caguamon.....$20" />
     <item
         android:id="@+id/item_maruchan"
-        android:title="Maruchan" />
+        android:title="Maruchan.......$6" />
     <item
         android:id="@+id/item_atun"
-        android:title="Atun" />
+        android:title="Atun...............$14" />
     <item
         android:id="@+id/item_nito"
-        android:title="Nito bimbo" />
+        android:title="Nito bimbo.....$13" />
     <item
-        android:id="@+id/item_fourloko"
-        android:title="Fourloko" />
+        android:id="@+id/item_loko"
+        android:title="Fourloko.........$15" />
     <item
         android:id="@+id/item_cola"
-        android:title="Coca cola" />
+        android:title="Coca Cola.......$10" />
     <item
         android:id="@+id/item_agua"
-        android:title="Agua" />
+        android:title="Agua................$5" />
 </menu>

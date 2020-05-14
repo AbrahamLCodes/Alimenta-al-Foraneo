@@ -6,19 +6,19 @@
         android:orderInCategory="100"
         app:showAsAction="never" />
     <item
-        android:id="@+id/item_papitas"
-        android:title="curitas" />
+        android:id="@+id/item_curitas"
+        android:title="Curitas.......................$5" />
     <item
-        android:id="@+id/item_caguamon"
-        android:title="peptoabismol" />
+        android:id="@+id/item_pepto"
+        android:title="Peptobismol............$10" />
     <item
-        android:id="@+id/item_maruchan"
-        android:title="Maruchan medicinal" />
+        android:id="@+id/item_maruchan_medicinal"
+        android:title="Maruchan medicinal..$8" />
     <item
-        android:id="@+id/item_atun"
-        android:title="aspirinas" />
+        android:id="@+id/item_aspirinas"
+        android:title="Aspirinas....................$15" />
     <item
-        android:id="@+id/item_nito"
-        android:title="fourloko medicinal" />
+        android:id="@+id/item_fourloko"
+        android:title="Fourloko medicinal...$12" />
 
 </menu>
