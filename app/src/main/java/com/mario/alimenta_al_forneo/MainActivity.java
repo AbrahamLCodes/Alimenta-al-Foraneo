@@ -308,11 +308,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void comprarItem(String comprado, String rechazado, int dinero, int precio){
-        if(dinero >= precio){
+    private void comprarItem(String comprado, String rechazado, int precio){
+        if(dinerocount >= precio){
             Toast.makeText(this,comprado,Toast.LENGTH_SHORT).show();
-            dinero = dinero - precio;
-            txtdinero.setText("$"+dinero);
+            dinerocount = dinerocount - precio;
+            txtdinero.setText("$"+dinerocount);
         }else{
             Toast.makeText(this, rechazado, Toast.LENGTH_SHORT).show();
         }
@@ -322,43 +322,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_curitas:
-                comprarItem("Haz comprado curitas","No tienes suficiente dinero", dinerocount,5);
+                comprarItem("Haz comprado curitas","No tienes suficiente dinero",5);
                 return true;
             case R.id.item_pepto:
-                comprarItem("Haz comprado un pepto bismol","No tienes suficiente dinero", dinerocount,10);
+                comprarItem("Haz comprado un pepto bismol","No tienes suficiente dinero",10);
                 return true;
             case R.id.item_maruchan_medicinal:
-                comprarItem("Haz comprado una maruchan medicinal","No tienes suficiente dinero", dinerocount,8);
+                comprarItem("Haz comprado una maruchan medicinal","No tienes suficiente dinero" ,8);
                 return true;
             case R.id.item_fourloko:
-                comprarItem("Haz comprado un four loko medicinal","No tienes suficiente dinero", dinerocount,12);
+                comprarItem("Haz comprado un four loko medicinal","No tienes suficiente dinero", 12);
                 return true;
             case R.id.item_aspirinas:
-                comprarItem("Haz comprado aspirinas","No tienes suficiente dinero", dinerocount,15);
+                comprarItem("Haz comprado aspirinas","No tienes suficiente dinero",15);
                 return true;
             case R.id.item_papitas:
-                comprarItem("Haz comprado unas papitas","No tienes suficiente dinero", dinerocount,11);
+                comprarItem("Haz comprado unas papitas","No tienes suficiente dinero",11);
                 return true;
             case R.id.item_caguamon:
-                comprarItem("Haz comprado un caguamon","No tienes suficiente dinero", dinerocount,20);
+                comprarItem("Haz comprado un caguamon","No tienes suficiente dinero",20);
                 return true;
             case R.id.item_maruchan:
-                comprarItem("Haz comprado una maruchan","No tienes suficiente dinero", dinerocount,6);
+                comprarItem("Haz comprado una maruchan","No tienes suficiente dinero",6);
                 return true;
             case R.id.item_atun:
-                comprarItem("Haz comprado una lata de atun","No tienes suficiente dinero", dinerocount,14);
+                comprarItem("Haz comprado una lata de atun","No tienes suficiente dinero",14);
                 return true;
             case R.id.item_nito:
-                comprarItem("Haz comprado un nito","No tienes suficiente dinero", dinerocount,13);
+                comprarItem("Haz comprado un nito","No tienes suficiente dinero",13);
                 return true;
             case R.id.item_loko:
-                comprarItem("Haz comprado un four loko","No tienes suficiente dinero", dinerocount,15);
+                comprarItem("Haz comprado un four loko","No tienes suficiente dinero",15);
                 return true;
             case R.id.item_cola:
-                comprarItem("Haz comprado una coca cola","No tienes suficiente dinero", dinerocount,10);
+                comprarItem("Haz comprado una coca cola","No tienes suficiente dinero",10);
                 return true;
             case R.id.item_agua:
-                comprarItem("Haz comprado un agua","No tienes suficiente dinero", dinerocount,5);
+                comprarItem("Haz comprado un agua","No tienes suficiente dinero",5);
                 return true;
 
 
