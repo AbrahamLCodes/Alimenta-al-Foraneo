@@ -308,140 +308,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    private void comprarItem(String comprado, String rechazado, int dinero, int precio){
+        if(dinero >= precio){
+            Toast.makeText(this,comprado,Toast.LENGTH_SHORT).show();
+            dinero = dinero - precio;
+            txtdinero.setText("$"+dinero);
+        }else{
+            Toast.makeText(this, rechazado, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_curitas:
-                if(dinerocount>=5){
-                    Toast.makeText(this, "Has comprado curitas", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-5;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-
-
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                }
-                txtdinero.setText(String.valueOf("$"+dinerocount));
+                comprarItem("Haz comprado curitas","No tienes suficiente dinero", dinerocount,5);
                 return true;
             case R.id.item_pepto:
-                if(dinerocount>=10){
-                    Toast.makeText(this, "Has comprado un pepto bismol", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-10;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado un pepto bismol","No tienes suficiente dinero", dinerocount,10);
                 return true;
             case R.id.item_maruchan_medicinal:
-                if(dinerocount>=8){
-                    Toast.makeText(this, "Has comprado maruchan medicinal", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-8;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado una maruchan medicinal","No tienes suficiente dinero", dinerocount,8);
                 return true;
             case R.id.item_fourloko:
-                if(dinerocount>=12){
-                    Toast.makeText(this, "Has comprado four loko", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-12;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado un four loko medicinal","No tienes suficiente dinero", dinerocount,12);
                 return true;
             case R.id.item_aspirinas:
-                if(dinerocount>=15){
-                    Toast.makeText(this, "Has comprado aspirinas", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-15;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado aspirinas","No tienes suficiente dinero", dinerocount,15);
                 return true;
             case R.id.item_papitas:
-                if(dinerocount>=11){
-                    Toast.makeText(this, "Has comprado papitas", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-11;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes sufieciente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado unas papitas","No tienes suficiente dinero", dinerocount,11);
                 return true;
             case R.id.item_caguamon:
-                if(dinerocount>=20){
-                    Toast.makeText(this, "Has comprado un caguamon", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-20;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado un caguamon","No tienes suficiente dinero", dinerocount,20);
                 return true;
             case R.id.item_maruchan:
-                if(dinerocount>=6){
-                    Toast.makeText(this, "Has comprado maruchan", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-6;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado una maruchan","No tienes suficiente dinero", dinerocount,6);
                 return true;
             case R.id.item_atun:
-                if(dinerocount>=14){
-                    Toast.makeText(this, "Has comprado atun", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-14;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado una lata de atun","No tienes suficiente dinero", dinerocount,14);
                 return true;
             case R.id.item_nito:
-                if(dinerocount>=13){
-                    Toast.makeText(this, "Has comprado un nito", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-13;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado un nito","No tienes suficiente dinero", dinerocount,13);
                 return true;
             case R.id.item_loko:
-                if(dinerocount>=15){
-                    Toast.makeText(this, "Has comprado un four loko", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-15;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado un four loko","No tienes suficiente dinero", dinerocount,15);
                 return true;
             case R.id.item_cola:
-                if(dinerocount>=10){
-                    Toast.makeText(this, "Has comprado una coca cola", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-10;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado una coca cola","No tienes suficiente dinero", dinerocount,10);
                 return true;
             case R.id.item_agua:
-                if(dinerocount>=5){
-                    Toast.makeText(this, "Has comprado un agua", Toast.LENGTH_SHORT).show();
-                    dinerocount=dinerocount-5;
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }else{
-                    Toast.makeText(this, "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
-                    txtdinero.setText(String.valueOf("$"+dinerocount));
-                }
+                comprarItem("Haz comprado un agua","No tienes suficiente dinero", dinerocount,5);
                 return true;
 
 
