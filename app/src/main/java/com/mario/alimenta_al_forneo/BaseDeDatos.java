@@ -18,7 +18,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
 
     private static final String NOMBRE_BD = "basededatos.bd";
     private static final int VERSION_BD=1;
-    private static final String TABLA_INVENTARIO="CREATE TABLE INVENTARIO (ITEMS TEXT)";
+    private static final String TABLA_INVENTARIO="CREATE TABLE INVENTARIO (ITEMS TEXT, ID INTEGER)";
 
     public BaseDeDatos(@Nullable Context context) {
         super(context, NOMBRE_BD, null, VERSION_BD);
@@ -34,17 +34,17 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLA_INVENTARIO+"");
     sqLiteDatabase.execSQL(TABLA_INVENTARIO);
     }
-    public void agregarItems(String item){
+    public void agregarItems(String item,int id){
         SQLiteDatabase bd=getWritableDatabase();
         if (bd!=null){
-            bd.execSQL("INSERT INTO INVENTARIO VALUES ('"+item+"')");
+            bd.execSQL("INSERT INTO INVENTARIO VALUES ('"+item+"','"+id+"')");
             bd.close();
         }
     }
-    public void eliminarItems(int item){
+    public void eliminarItems(int id){
         SQLiteDatabase bd=getWritableDatabase();
         if (bd!=null){
-            bd.execSQL("DELETE FROM INVENTARIO WHERE ITEMS='"+item+"'");
+            bd.execSQL("DELETE FROM INVENTARIO WHERE ID='"+id+"'");
             bd.close();
         }
     }
@@ -59,7 +59,9 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         }
         return listas;
     }
-
+    //public int retornarid (int index){
+      //      int idquery="SELECT IFNULL(MAX(id),0)+1 FROM INVENTARIO"
+   // }
 
 
 }

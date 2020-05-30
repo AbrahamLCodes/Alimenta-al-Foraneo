@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -331,55 +332,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (item.getItemId()) {
             case R.id.item_curitas:
                 comprarItem("Haz comprado curitas","No tienes suficiente dinero",5);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_curitas));
+                Log.wtf("a",""+baseDeDatos.mostrarLista().size());
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_curitas),baseDeDatos.mostrarLista().size());
+
                 return true;
             case R.id.item_pepto:
                 comprarItem("Haz comprado un pepto bismol","No tienes suficiente dinero",10);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_pepto));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_pepto),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_maruchan_medicinal:
                 comprarItem("Haz comprado una maruchan medicinal","No tienes suficiente dinero" ,8);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_maruchan));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_maruchan),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_fourloko:
                 comprarItem("Haz comprado un four loko medicinal","No tienes suficiente dinero", 12);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_fourloko));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_fourloko),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_aspirinas:
                 comprarItem("Haz comprado aspirinas","No tienes suficiente dinero",15);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_aspirinas));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_aspirinas),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_papitas:
                 comprarItem("Haz comprado unas papitas","No tienes suficiente dinero",11);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_papitas));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_papitas),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_caguamon:
                 comprarItem("Haz comprado un caguamon","No tienes suficiente dinero",20);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_caguamon));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_caguamon),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_maruchan:
                 comprarItem("Haz comprado una maruchan","No tienes suficiente dinero",6);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_maruchan2));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_maruchan2),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_atun:
                 comprarItem("Haz comprado una lata de atun","No tienes suficiente dinero",14);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_atun));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_atun),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_nito:
                 comprarItem("Haz comprado un nito","No tienes suficiente dinero",13);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_nito));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_nito),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_loko:
                 comprarItem("Haz comprado un four loko","No tienes suficiente dinero",15);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_loko));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_loko),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_cola:
                 comprarItem("Haz comprado una coca cola","No tienes suficiente dinero",10);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_cola));
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_cola),baseDeDatos.mostrarLista().size());
                 return true;
             case R.id.item_agua:
                 comprarItem("Haz comprado un agua","No tienes suficiente dinero",5);
-                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_agua));
+                Log.wtf("a",""+baseDeDatos.mostrarLista().size());
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_agua),baseDeDatos.mostrarLista().size());
                 return true;
 
 
