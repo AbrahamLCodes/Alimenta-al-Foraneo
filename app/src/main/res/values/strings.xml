@@ -14,6 +14,20 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="titulo_curitas">Curitas</string>
+    <string name="titulo_pepto">Peptobismol</string>
+    <string name="titulo_maruchan">Maruchan Medicinal</string>
+    <string name="titulo_aspirinas">Aspirinas</string>
+    <string name="titulo_fourloko">Fourloko Medicinal</string>
+
+    <string name="titulo_papitas">Papitas</string>
+    <string name="titulo_caguamon">Caguamon</string>
+    <string name="titulo_maruchan2">Maruchan</string>
+    <string name="titulo_atun">Atun</string>
+    <string name="titulo_nito">Nito bimbo</string>
+    <string name="titulo_loko">Fourloko</string>
+    <string name="titulo_cola">Coca cola</string>
+    <string name="titulo_agua">Agua</string>
 
     <string name="home_second">Home Second</string>
 </resources>

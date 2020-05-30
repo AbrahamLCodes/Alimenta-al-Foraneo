@@ -3,14 +3,19 @@ package com.mario.alimenta_al_forneo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -112,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new hilofelicidad().start();
         new hilovida().start();
 
+        //Base de datos
+        final BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
     }
 
     @Override
@@ -279,12 +286,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.openDrawer(naviView);
                 break;
             case R.id.img_btn_Inv:
-                play_sp();
-                naviView.getMenu().clear();
-                naviView.inflateMenu(R.menu.navigation_menu2);
-                naviView.removeHeaderView(naviView.getHeaderView(0));
-                naviView.inflateHeaderView(R.layout.header_layout3);
-                mDrawerLayout.openDrawer(naviView);
+                Intent mostrarDatos = new Intent(getApplicationContext(),activityDatos.class);
+                startActivity(mostrarDatos);
+
                 break;
             case R.id.img_btn_otso:
                 play_sp();
@@ -309,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void comprarItem(String comprado, String rechazado, int precio){
+
         if(dinerocount >= precio){
             Toast.makeText(this,comprado,Toast.LENGTH_SHORT).show();
             dinerocount = dinerocount - precio;
@@ -318,47 +323,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected (@NonNull MenuItem item) {
+        final BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
         switch (item.getItemId()) {
             case R.id.item_curitas:
                 comprarItem("Haz comprado curitas","No tienes suficiente dinero",5);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_curitas));
                 return true;
             case R.id.item_pepto:
                 comprarItem("Haz comprado un pepto bismol","No tienes suficiente dinero",10);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_pepto));
                 return true;
             case R.id.item_maruchan_medicinal:
                 comprarItem("Haz comprado una maruchan medicinal","No tienes suficiente dinero" ,8);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_maruchan));
                 return true;
             case R.id.item_fourloko:
                 comprarItem("Haz comprado un four loko medicinal","No tienes suficiente dinero", 12);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_fourloko));
                 return true;
             case R.id.item_aspirinas:
                 comprarItem("Haz comprado aspirinas","No tienes suficiente dinero",15);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_aspirinas));
                 return true;
             case R.id.item_papitas:
                 comprarItem("Haz comprado unas papitas","No tienes suficiente dinero",11);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_papitas));
                 return true;
             case R.id.item_caguamon:
                 comprarItem("Haz comprado un caguamon","No tienes suficiente dinero",20);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_caguamon));
                 return true;
             case R.id.item_maruchan:
                 comprarItem("Haz comprado una maruchan","No tienes suficiente dinero",6);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_maruchan2));
                 return true;
             case R.id.item_atun:
                 comprarItem("Haz comprado una lata de atun","No tienes suficiente dinero",14);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_atun));
                 return true;
             case R.id.item_nito:
                 comprarItem("Haz comprado un nito","No tienes suficiente dinero",13);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_nito));
                 return true;
             case R.id.item_loko:
                 comprarItem("Haz comprado un four loko","No tienes suficiente dinero",15);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_loko));
                 return true;
             case R.id.item_cola:
                 comprarItem("Haz comprado una coca cola","No tienes suficiente dinero",10);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_cola));
                 return true;
             case R.id.item_agua:
                 comprarItem("Haz comprado un agua","No tienes suficiente dinero",5);
+                baseDeDatos.agregarItems(getResources().getString(R.string.titulo_agua));
                 return true;
 
 
