@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 
 public class CostumeDialog extends AppCompatDialogFragment  {
-    private ImageView image1,image2;
+    private ImageView image1,image2,image3;
     private int temp;
 
 
@@ -34,6 +34,7 @@ public class CostumeDialog extends AppCompatDialogFragment  {
 
         image1 = view.findViewById(R.id.skinRojo);
         image2 = view.findViewById(R.id.skinAzul);
+        image3 = view.findViewById(R.id.skinNormal);
 
         image1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +52,15 @@ public class CostumeDialog extends AppCompatDialogFragment  {
             }
         });
 
+        image3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                temp = R.drawable.foraneoocho;
+                Toast.makeText(getContext(),"Vaquero",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
         builder.setView(view)
                 .setTitle("Ajustes")
@@ -67,9 +77,9 @@ public class CostumeDialog extends AppCompatDialogFragment  {
                         listener.apllytext(Name);
                         if(temp != 0){
                             MainActivity.setForaneo(temp);
-                            Toast.makeText(getContext(), "No es NULL", Toast.LENGTH_SHORT).show();
+
                         }else{
-                            Toast.makeText(getContext(), "Temp es NULL", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });

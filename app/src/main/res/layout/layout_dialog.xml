@@ -77,6 +77,12 @@
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/foraneodiez" />
+            <ImageButton
+                android:id="@+id/skinNormal"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/foraneoocho" />
 
         </LinearLayout>
 

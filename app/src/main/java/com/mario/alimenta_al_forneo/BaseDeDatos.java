@@ -20,6 +20,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     private static final int VERSION_BD = 1;
     private static final String TABLA_INVENTARIO = "CREATE TABLE INVENTARIO (ITEMS TEXT, ID INTEGER)";
     private static final String TABLA_STATS = "CREATE TABLE STATS (VIDA INTEGER, FELICIDAD INTEGER, HAMBRE INTEGER, ID INTEGER, CORRIDO INTEGER, DINERO INTEGER)";
+    private static final String TABLA_FORANEO ="CREATE TABLE FORANEO (NOMBRE TEXT, SKIN INTEGER, ID INTEGER)";
 
     public BaseDeDatos(@Nullable Context context) {
         super(context, NOMBRE_BD, null, VERSION_BD);
@@ -29,6 +30,8 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(TABLA_INVENTARIO);
         sqLiteDatabase.execSQL(TABLA_STATS);
+        sqLiteDatabase.execSQL(TABLA_FORANEO);
+        sqLiteDatabase.execSQL("INSERT INTO FORANEO VALUES('"+"Paquito"+"','"+700158+"','"+1+"')");
         sqLiteDatabase.execSQL("INSERT INTO STATS VALUES ('"+0+"','"+0+"','"+0+"','"+1+"','"+0+"','"+0+"')");
     }
 
@@ -38,9 +41,19 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TABLA_INVENTARIO);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLA_STATS+ "");
         sqLiteDatabase.execSQL(TABLA_STATS);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLA_FORANEO + "");
     }
 
+
+
     public void agregarItems(String item, int id) {
+        SQLiteDatabase bd = getWritableDatabase();
+        if (bd != null) {
+            bd.execSQL("INSERT INTO INVENTARIO VALUES ('" + item + "','" + id + "')");
+            bd.close();
+        }
+    }
+    public void agregar(String item, int id) {
         SQLiteDatabase bd = getWritableDatabase();
         if (bd != null) {
             bd.execSQL("INSERT INTO INVENTARIO VALUES ('" + item + "','" + id + "')");
@@ -68,6 +81,13 @@ public class BaseDeDatos extends SQLiteOpenHelper {
             bd.close();
         }
     }
+    public void agregarForaneo(String nombre, int imagen){
+        SQLiteDatabase bd = getWritableDatabase();
+        if(bd!=null){
+            bd.execSQL("UPDATE FORANEO SET NOMBRE='"+nombre+"', SKIN='"+imagen+"' WHERE ID=1");
+        }
+    }
+
     public int [] getStats(){
         SQLiteDatabase bd =getReadableDatabase();
         Cursor cursor = bd.rawQuery("SELECT * FROM STATS WHERE ID =1", null);
@@ -83,6 +103,19 @@ public class BaseDeDatos extends SQLiteOpenHelper {
        return arreglostats;
     }
 
+
+    public String[] getForaneo(){
+    SQLiteDatabase bd = getReadableDatabase();
+    Cursor cursor = bd.rawQuery("SELECT * FROM FORANEO WHERE ID = 1",null);
+    String[]foraneostats = new String[3];
+    if(bd!=null && cursor!=null){
+        cursor.moveToFirst();
+        foraneostats[0]=cursor.getString(0);
+        foraneostats[1]=String.valueOf(cursor.getInt(1));
+
+    }
+    return foraneostats;
+    }
 
 
 

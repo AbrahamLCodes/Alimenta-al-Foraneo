@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean isRunning3 =true;
     public boolean isRunning2 = true;
 
+    private static int IMAGEN_RECURSO;
 
     /* Curar vida */
     public static void setVidaPoints(int vidaPoints) {
@@ -103,9 +104,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          felcidadBar = findViewById(R.id.progressBar_felcidad);
          vidaBar = findViewById(R.id.progressBar_vida);
          hambreBar = findViewById(R.id.progressBar_hambre);
+
         /* images */
 
         foraneo = findViewById(R.id.img_foraneo);
+
 
         /*Items farmacia*/
         item_curitas = findViewById(R.id.item_curitas);
@@ -130,6 +133,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new hilofelicidad().start();
         new hilovida().start();
 
+
+
         //Comprobar que si la app corrio por primera vez para asignarle los valores
          BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
         if (baseDeDatos.firstRun()==0) {
@@ -137,12 +142,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             felicidadPoints=100;
             hambrePoints=100;
             dinerocount=0;
+            IMAGEN_RECURSO=R.drawable.foraneoocho;
+
+            foraneo.setImageResource(IMAGEN_RECURSO);
+            txtnombre.setText("Paquito");
             baseDeDatos.setCorrido();
         }else {
             vidaPoints=baseDeDatos.getStats()[0];
             felicidadPoints=baseDeDatos.getStats()[1];
             hambrePoints=baseDeDatos.getStats()[2];
             dinerocount=baseDeDatos.getStats()[3];
+            foraneo.setImageResource(Integer.parseInt(baseDeDatos.getForaneo()[1]));
+            txtnombre.setText(baseDeDatos.getForaneo()[0]);
         }
     }
 
@@ -296,6 +307,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static void setForaneo(int f) {
 
         foraneo.setImageResource(f);
+        IMAGEN_RECURSO=f;
     }
 
     private void openDialog() {
@@ -424,5 +436,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onPause();
         final BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
         baseDeDatos.agregarStats(vidaPoints,felicidadPoints,hambrePoints,dinerocount);
+
+        baseDeDatos.agregarForaneo(txtnombre.getText().toString(),IMAGEN_RECURSO);
+
     }
 }
