@@ -130,8 +130,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new hilofelicidad().start();
         new hilovida().start();
 
-        //Base de datos
-        final BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
+        //Comprobar que si la app corrio por primera vez para asignarle los valores
+         BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
+        if (baseDeDatos.firstRun()==0) {
+            vidaPoints=100;
+            felicidadPoints=100;
+            hambrePoints=100;
+            dinerocount=0;
+            baseDeDatos.setCorrido();
+        }else {
+            vidaPoints=baseDeDatos.getStats()[0];
+            felicidadPoints=baseDeDatos.getStats()[1];
+            hambrePoints=baseDeDatos.getStats()[2];
+            dinerocount=baseDeDatos.getStats()[3];
+        }
     }
 
     @Override
@@ -143,9 +155,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void run() {
             super.run();
+
             while(isRunning0){
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(2500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -179,12 +192,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void run() {
             super.run();
-            dinerocount=0;
+
 
 
             for(int i=0; i<=100;i++){
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -212,9 +225,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void run() {
             super.run();
+            final BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
+
             while(isRunning2){
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(2500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -247,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.run();
             while(isRunning3){
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(2500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -347,7 +362,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 comprarItem("Haz comprado curitas","No tienes suficiente dinero",5);
                 Log.wtf("a",""+baseDeDatos.mostrarLista().size());
                 baseDeDatos.agregarItems(getResources().getString(R.string.titulo_curitas),baseDeDatos.mostrarLista().size());
-
                 return true;
             case R.id.item_pepto:
                 comprarItem("Haz comprado un pepto bismol","No tienes suficiente dinero",10);
@@ -409,6 +423,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onPause() {
         super.onPause();
         final BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
-        baseDeDatos.agregarStats(vidaPoints,felicidadPoints,hambrePoints);
+        baseDeDatos.agregarStats(vidaPoints,felicidadPoints,hambrePoints,dinerocount);
     }
 }
