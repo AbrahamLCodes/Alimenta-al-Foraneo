@@ -33,17 +33,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             item_papitas, item_caguamon, item_maruchan, item_atun, item_nito, item_loko, item_cola, item_agua;
     private ProgressBar vidaBar,felcidadBar,hambreBar;
     public SoundPool sp;
-    private int vidaPoints,felicidadPoints,dinerocount, valordinero, precioitem;
-    private int hambrePoints;
+    public static int vidaPoints,felicidadPoints,dinerocount,hambrePoints;
+
     public int flujoDeMusia = 0;
     public boolean isRunning0 = true;
     public boolean isRunning3 =true;
     public boolean isRunning2 = true;
 
 
+    /* Curar vida */
+    public static void setVidaPoints(int vidaPoints) {
+        MainActivity.vidaPoints=MainActivity.vidaPoints+vidaPoints;
 
+    }
 
+    /* Felicidad*/
+    public static void setFelicidadPoints(int felicidadPoints){
+        MainActivity.felicidadPoints=MainActivity.felicidadPoints+felicidadPoints;
+    }
 
+    /*Hambre*/
+    public static void setHambrePoints(int hambrePoints){
+        MainActivity.hambrePoints=MainActivity.hambrePoints+hambrePoints;
+    }
 
     //-----------------------------------------------------------------
     @Override
@@ -263,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     protected void onResume() {
         super.onResume();
+
     }
 
     public static void setForaneo(int f) {
@@ -392,4 +405,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        final BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
+        baseDeDatos.agregarStats(vidaPoints,felicidadPoints,hambrePoints);
+    }
 }

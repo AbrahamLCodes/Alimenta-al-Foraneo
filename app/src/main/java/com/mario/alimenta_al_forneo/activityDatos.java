@@ -41,13 +41,20 @@ public class activityDatos extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+
+
     private void iniciaArreglo() {
         arreglo = new String[base.mostrarLista().size()];
         arregloID = new int[base.mostrarLista().size()];
 
         for (int i = 0; i < arreglo.length; i++) {
             arregloID[i] = base.mostrarLista().get(i).getId();
-            arreglo[i] = base.mostrarLista().get(i).getItem() + arregloID[i];
+            arreglo[i] = base.mostrarLista().get(i).getItem();
         }
     }
 
@@ -77,45 +84,74 @@ public class activityDatos extends AppCompatActivity implements AdapterView.OnIt
         switch (value) {
             case "Curitas":
                 Toast.makeText(this, "Haz usado curitas", Toast.LENGTH_SHORT).show();
+                MainActivity.setVidaPoints(5);
                 break;
             case "Pepto bismol":
                 Toast.makeText(this, "Haz tomado un pepto", Toast.LENGTH_SHORT).show();
+                MainActivity.setVidaPoints(8);
                 break;
             case "Maruchan Medicinal":
                 Toast.makeText(this, "Comiste una marucha medicinal", Toast.LENGTH_SHORT).show();
+                MainActivity.setVidaPoints(10);
+                MainActivity.setHambrePoints(10);
                 break;
             case "Aspirinas":
                 Toast.makeText(this, "Haz tomado unas aspirinas", Toast.LENGTH_SHORT).show();
+                MainActivity.setVidaPoints(12);
                 break;
             case "Fourloko Medicinal":
                 Toast.makeText(this, "Haz tomado un fourloko medicinal", Toast.LENGTH_SHORT).show();
+                MainActivity.setVidaPoints(15);
+                MainActivity.setHambrePoints(5);
                 break;
             case "Papitas":
                 Toast.makeText(this, "Comiste unas papitas", Toast.LENGTH_SHORT).show();
+                MainActivity.setHambrePoints(15);
                 break;
             case "Caguamon":
                 Toast.makeText(this, "Haz tomado un caguamon ", Toast.LENGTH_SHORT).show();
+                MainActivity.setHambrePoints(10);
+                MainActivity.setFelicidadPoints(15);
+                MainActivity.setVidaPoints(-5);
                 break;
             case "Maruchan":
                 Toast.makeText(this, "Comiste una maruchan", Toast.LENGTH_SHORT).show();
+                MainActivity.setHambrePoints(11);
                 break;
             case "Atun":
                 Toast.makeText(this, "Comiste una lata de atun", Toast.LENGTH_SHORT).show();
+                MainActivity.setHambrePoints(9);
                 break;
             case "Nito bimbo":
                 Toast.makeText(this, "Comiste un nito bimbo", Toast.LENGTH_SHORT).show();
+                MainActivity.setHambrePoints(14);
+                MainActivity.setFelicidadPoints(5);
                 break;
             case "Fourloko":
                 Toast.makeText(this, "Haz tomado un fourloko", Toast.LENGTH_SHORT).show();
+                MainActivity.setHambrePoints(8);
+                MainActivity.setFelicidadPoints(10);
                 break;
             case "Coca cola":
                 Toast.makeText(this, "Haz tomado una coca cola", Toast.LENGTH_SHORT).show();
+                MainActivity.setHambrePoints(12);
+                MainActivity.setFelicidadPoints(5);
                 break;
             case "Agua":
                 Toast.makeText(this, "Haz tomado una botella de agua", Toast.LENGTH_SHORT).show();
+                MainActivity.setHambrePoints(5);
                 break;
         }
         recyclerViewLista.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arreglo));
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+
+
+    }
+
 }

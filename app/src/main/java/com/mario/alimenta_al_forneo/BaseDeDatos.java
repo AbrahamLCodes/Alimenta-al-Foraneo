@@ -19,6 +19,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     private static final String NOMBRE_BD = "basededatos.bd";
     private static final int VERSION_BD = 1;
     private static final String TABLA_INVENTARIO = "CREATE TABLE INVENTARIO (ITEMS TEXT, ID INTEGER)";
+    private static final String TABLA_STATS = "CREATE TABLE STATS (VIDA INTEGER, FELICIDAD INTEGER, HAMBRE INTEGER)";
 
     public BaseDeDatos(@Nullable Context context) {
         super(context, NOMBRE_BD, null, VERSION_BD);
@@ -27,18 +28,36 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(TABLA_INVENTARIO);
+        sqLiteDatabase.execSQL(TABLA_STATS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLA_INVENTARIO + "");
         sqLiteDatabase.execSQL(TABLA_INVENTARIO);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLA_STATS+ "");
+        sqLiteDatabase.execSQL(TABLA_STATS);
     }
 
     public void agregarItems(String item, int id) {
         SQLiteDatabase bd = getWritableDatabase();
         if (bd != null) {
             bd.execSQL("INSERT INTO INVENTARIO VALUES ('" + item + "','" + id + "')");
+            bd.close();
+        }
+    }
+
+    public void agregarStats(int vida, int felicidad, int hambre){
+        SQLiteDatabase bd = getWritableDatabase();
+        if (bd != null){
+            bd.execSQL("INSERT INTO STATS VALUES ('"+vida+"','"+felicidad+"','"+hambre+"')");
+            bd.close();
+        }
+    }
+    public void eliminarStats(int vida, int felicidad, int hambre) {
+        SQLiteDatabase bd = getWritableDatabase();
+        if (bd != null) {
+            bd.execSQL("DELETE FROM STATS WHERE VIDA='" + vida + "' AND FELICIDAD='"+felicidad+"' AND HAMBRE='"+hambre+"'");
             bd.close();
         }
     }
@@ -50,6 +69,8 @@ public class BaseDeDatos extends SQLiteOpenHelper {
             bd.close();
         }
     }
+
+
 
     public List<listaModelo> mostrarLista() {
         SQLiteDatabase bd = getReadableDatabase();
