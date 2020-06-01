@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:context=".MainActivity">
+    tools:context="proyecto.iceCreamSandwich.alimenta_al_forneo.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="100%"
+                    android:text="0%"
                     android:textSize="18sp" />
 
                 <ProgressBar
@@ -116,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="100%"
+                    android:text="0%"
                     android:textSize="18sp" />
 
                 <ProgressBar
@@ -201,7 +201,7 @@
                     android:layout_weight="1"
                     android:gravity="center|top"
 
-                    android:text="100$" />
+                    android:text="0$" />
 
                 <ImageView
                     android:id="@+id/imageView5"
@@ -218,7 +218,7 @@
         <LinearLayout
             android:id="@+id/Layout_bottom"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:background="#45FFFFFF"
             android:gravity="bottom"
@@ -228,7 +228,7 @@
             <ImageButton
                 android:id="@+id/img_btn_farmacia"
                 style="@android:style/Widget.Material.Light.ImageButton"
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
 
@@ -240,7 +240,7 @@
             <ImageButton
                 android:id="@+id/img_btn_Inv"
                 style="@android:style/Widget.DeviceDefault.Light.ImageButton"
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
@@ -254,7 +254,7 @@
             <ImageButton
                 android:id="@+id/img_btn_otso"
                 style="@android:style/Widget.DeviceDefault.Light.ImageButton"
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activityDatos">
+    tools:context="proyecto.iceCreamSandwich.alimenta_al_forneo.ActivityDatos">
 
     <TextView
         android:id="@+id/textView3"

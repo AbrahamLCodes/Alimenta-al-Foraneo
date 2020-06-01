@@ -1,19 +1,18 @@
-package com.mario.alimenta_al_forneo;
+package proyecto.iceCreamSandwich.alimenta_al_forneo;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class activityDatos extends AppCompatActivity implements AdapterView.OnItemClickListener {
+import com.mario.alimenta_al_forneo.R;
+
+public class ActivityDatos extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ListView recyclerViewLista;
     private AdaptadorDatos adaptadorLista;
     private BaseDeDatos base;
@@ -82,32 +81,62 @@ public class activityDatos extends AppCompatActivity implements AdapterView.OnIt
 
         String value = (String) parent.getItemAtPosition(position);
         switch (value) {
+            //items de salud
             case "Curitas":
-                Toast.makeText(this, "Haz usado curitas", Toast.LENGTH_SHORT).show();
+                if(MainActivity.vidaPoints >=100){
+                Toast.makeText(this, "vida maxima", Toast.LENGTH_SHORT).show();
+                break;
+            }else{
                 MainActivity.setVidaPoints(5);
+                Toast.makeText(this, "Haz usado curitas", Toast.LENGTH_SHORT).show();
                 break;
+            }
             case "Pepto bismol":
-                Toast.makeText(this, "Haz tomado un pepto", Toast.LENGTH_SHORT).show();
-                MainActivity.setVidaPoints(8);
-                break;
+                if(MainActivity.vidaPoints >=100){
+                    Toast.makeText(this, "vida maxima", Toast.LENGTH_SHORT).show();
+                    break;
+                }else{
+                    MainActivity.setVidaPoints(8);
+                    Toast.makeText(this, "Haz tomado un pepto", Toast.LENGTH_SHORT).show();
+                    if(MainActivity.vidaPoints >100){
+                        MainActivity.setVidaPoints(-8);
+                    }
+                    break;
+                }
             case "Maruchan Medicinal":
                 Toast.makeText(this, "Comiste una marucha medicinal", Toast.LENGTH_SHORT).show();
                 MainActivity.setVidaPoints(10);
                 MainActivity.setHambrePoints(10);
                 break;
             case "Aspirinas":
-                Toast.makeText(this, "Haz tomado unas aspirinas", Toast.LENGTH_SHORT).show();
-                MainActivity.setVidaPoints(12);
-                break;
+                if(MainActivity.vidaPoints >=100){
+                    Toast.makeText(this, "vida maxima", Toast.LENGTH_SHORT).show();
+                    break;
+                }else{
+                    MainActivity.setVidaPoints(12);
+                    Toast.makeText(this, "Haz tomado unas aspirinas", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case "Fourloko Medicinal":
-                Toast.makeText(this, "Haz tomado un fourloko medicinal", Toast.LENGTH_SHORT).show();
-                MainActivity.setVidaPoints(15);
-                MainActivity.setHambrePoints(5);
-                break;
+                if(MainActivity.hambrePoints >100){
+                    Toast.makeText(this, "vida al maximo", Toast.LENGTH_SHORT).show();
+                    break;
+                }else{
+                    Toast.makeText(this, "Haz tomado un fourloko medicinal", Toast.LENGTH_SHORT).show();
+                    MainActivity.setVidaPoints(15);
+                    MainActivity.setHambrePoints(5);
+                    break;
+                }
+                //items de hambre
             case "Papitas":
-                Toast.makeText(this, "Comiste unas papitas", Toast.LENGTH_SHORT).show();
-                MainActivity.setHambrePoints(15);
+            if(MainActivity.hambrePoints >=100){
+                Toast.makeText(this, "hambre al maximo", Toast.LENGTH_SHORT).show();
                 break;
+            }else{
+                MainActivity.setHambrePoints(15);
+                Toast.makeText(this, "has comido papitas ", Toast.LENGTH_SHORT).show();
+                break;
+            }
             case "Caguamon":
                 Toast.makeText(this, "Haz tomado un caguamon ", Toast.LENGTH_SHORT).show();
                 MainActivity.setHambrePoints(10);
@@ -115,20 +144,35 @@ public class activityDatos extends AppCompatActivity implements AdapterView.OnIt
                 MainActivity.setVidaPoints(-5);
                 break;
             case "Maruchan":
-                Toast.makeText(this, "Comiste una maruchan", Toast.LENGTH_SHORT).show();
-                MainActivity.setHambrePoints(11);
-                break;
+                if(MainActivity.hambrePoints >=100){
+                    Toast.makeText(this, "hambre al maximo", Toast.LENGTH_SHORT).show();
+                    break;
+                }else{
+                    MainActivity.setHambrePoints(11);
+                    Toast.makeText(this, "Comiste una maruchan", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case "Atun":
-                Toast.makeText(this, "Comiste una lata de atun", Toast.LENGTH_SHORT).show();
-                MainActivity.setHambrePoints(9);
-                break;
+                if(MainActivity.hambrePoints >=100){
+                    Toast.makeText(this, "hambre al maximo", Toast.LENGTH_SHORT).show();
+                    break;
+                }else{
+                    MainActivity.setHambrePoints(9);
+                    Toast.makeText(this, "Comiste una lata de atun", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case "Nito bimbo":
-                Toast.makeText(this, "Comiste un nito bimbo", Toast.LENGTH_SHORT).show();
-                MainActivity.setHambrePoints(14);
-                MainActivity.setFelicidadPoints(5);
-                break;
+                if(MainActivity.hambrePoints < 100){
+                    MainActivity.setHambrePoints(14);
+                    MainActivity.setFelicidadPoints(5);
+                    Toast.makeText(this, "comiste 1 negrito", Toast.LENGTH_SHORT).show();
+                    break;
+                }else{
+                    Toast.makeText(this, "hambre al maximo", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case "Fourloko":
-                Toast.makeText(this, "Haz tomado un fourloko", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Haz tomado un zuculento fourloko", Toast.LENGTH_SHORT).show();
                 MainActivity.setHambrePoints(8);
                 MainActivity.setFelicidadPoints(10);
                 break;
@@ -138,19 +182,17 @@ public class activityDatos extends AppCompatActivity implements AdapterView.OnIt
                 MainActivity.setFelicidadPoints(5);
                 break;
             case "Agua":
-                Toast.makeText(this, "Haz tomado una botella de agua", Toast.LENGTH_SHORT).show();
-                MainActivity.setHambrePoints(5);
-                break;
+                if (MainActivity.hambrePoints > 100){
+                    Toast.makeText(this, "hambre al maximo", Toast.LENGTH_SHORT).show();
+                    break;
+                }else{
+                    Toast.makeText(this, "Haz tomado una botella de agua", Toast.LENGTH_SHORT).show();
+                    MainActivity.setHambrePoints(5);
+                    break;
+                }
+
         }
         recyclerViewLista.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arreglo));
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-
 
     }
 

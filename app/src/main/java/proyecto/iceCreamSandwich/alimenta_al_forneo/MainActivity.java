@@ -1,27 +1,26 @@
-package com.mario.alimenta_al_forneo;
+package proyecto.iceCreamSandwich.alimenta_al_forneo;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.mario.alimenta_al_forneo.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CostumeDialog.CostumeDialogInterface, NavigationView.OnNavigationItemSelectedListener {
     private static ImageView foraneo;
@@ -45,17 +44,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /* Curar vida */
     public static void setVidaPoints(int vidaPoints) {
         MainActivity.vidaPoints=MainActivity.vidaPoints+vidaPoints;
+        if(MainActivity.vidaPoints >100){
+            MainActivity.vidaPoints =100;
+        }
 
     }
 
     /* Felicidad*/
     public static void setFelicidadPoints(int felicidadPoints){
         MainActivity.felicidadPoints=MainActivity.felicidadPoints+felicidadPoints;
+        if(MainActivity.felicidadPoints >100){
+            MainActivity.felicidadPoints =100;
+        }
     }
 
     /*Hambre*/
     public static void setHambrePoints(int hambrePoints){
-        MainActivity.hambrePoints=MainActivity.hambrePoints+hambrePoints;
+     MainActivity.hambrePoints=MainActivity.hambrePoints+hambrePoints;
+     if(MainActivity.hambrePoints>100){
+         MainActivity.hambrePoints =100;
+     }
     }
 
     //-----------------------------------------------------------------
@@ -63,13 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        vidaPoints =100;
-        felicidadPoints=100;
-        hambrePoints =100;
-
-
         //Sonido
         sp = new SoundPool(8, AudioManager.STREAM_MUSIC, 0);
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -78,9 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         naviView = findViewById(R.id.naviVew);
         mDrawerLayout = findViewById(R.id.drawerLayout);
         naviView.setNavigationItemSelectedListener(this);
-
         /* images bottons */
-
         ajustes = findViewById(R.id.imgbtn_ajustes);
         ajustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,32 +91,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         otso = findViewById(R.id.img_btn_otso);
         salud = findViewById(R.id.img_btn_farmacia);
         salud.setOnClickListener(this);
-
         /* txt views */
         txtnombre = findViewById(R.id.txt_v_nombre);
         txtdinero = findViewById(R.id.txt_view_dinero);
         txtfelicidad = findViewById(R.id.txt_v_happy);
         txthambre = findViewById(R.id.txt_v_comida);
         txtvida = findViewById(R.id.txt_v_vida);
-
         /* progressbars */
          felcidadBar = findViewById(R.id.progressBar_felcidad);
          vidaBar = findViewById(R.id.progressBar_vida);
          hambreBar = findViewById(R.id.progressBar_hambre);
-
         /* images */
-
         foraneo = findViewById(R.id.img_foraneo);
-
-
         /*Items farmacia*/
         item_curitas = findViewById(R.id.item_curitas);
         item_pepto = findViewById(R.id.item_pepto);
         item_maruchan_medicinal = findViewById(R.id.item_maruchan_medicinal);
         item_aspirinas = findViewById(R.id.item_aspirinas);
         item_fourloko = findViewById(R.id.item_fourloko);
-
-
         /*Items tienda Otso*/
         item_papitas = findViewById(R.id.item_papitas);
         item_caguamon = findViewById(R.id.item_caguamon);
@@ -127,13 +118,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         item_loko = findViewById(R.id.item_loko);
         item_cola = findViewById(R.id.item_cola);
         item_agua = findViewById(R.id.item_agua);
-
+        //inicio de threads
         new hilodinero().start();
         new hilohambre().start();
         new hilofelicidad().start();
         new hilovida().start();
-
-
 
         //Comprobar que si la app corrio por primera vez para asignarle los valores
          BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
@@ -143,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             hambrePoints=100;
             dinerocount=0;
             IMAGEN_RECURSO=R.drawable.foraneoocho;
-
             foraneo.setImageResource(IMAGEN_RECURSO);
             txtnombre.setText("Paquito");
             baseDeDatos.setCorrido();
@@ -161,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
     }
-
+//procesos de la barra de vida
     class hilovida extends Thread{
         @Override
         public void run() {
@@ -178,8 +166,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void run() {
                         if(vidaPoints <= 0){
                             vidaBar.setProgress(0);
-                            isRunning0=false;
+                            Toast.makeText(MainActivity.this, "tu foraneo se murio :c", Toast.LENGTH_SHORT).show();
                             foraneo.setImageResource(R.drawable.foraneotriste);
+                            GameOver();
+                            isRunning0= false;
                         }
                         else{
                             if(hambrePoints == 0){
@@ -193,20 +183,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
-
-
             }
         }
     }
-
+//contador de la barra de dinero
     class hilodinero extends Thread{
         @Override
         public void run() {
             super.run();
-
-
-
-            for(int i=0; i<=100;i++){
+            while(isRunning0){
             try {
                 Thread.sleep(1000);
 
@@ -231,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
+//contador de la barra de hambre
     class hilohambre extends Thread{
         @Override
         public void run() {
@@ -248,7 +233,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         if(hambrePoints == 0){
-                            isRunning2 =false;
                             vidaPoints--;
                         }
                         else{
@@ -266,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
+    //contador de la barra de vida
     class hilofelicidad extends Thread{
         @Override
         public void run() {
@@ -281,7 +265,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         if(felicidadPoints == 0){
-                            isRunning3 =false;
                             vidaPoints--;
                         }
                         else{
@@ -327,9 +310,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.openDrawer(naviView);
                 break;
             case R.id.img_btn_Inv:
-                Intent mostrarDatos = new Intent(getApplicationContext(),activityDatos.class);
+                Intent mostrarDatos = new Intent(getApplicationContext(), ActivityDatos.class);
                 startActivity(mostrarDatos);
-
+                play_sp();
                 break;
             case R.id.img_btn_otso:
                 play_sp();
@@ -358,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(dinerocount >= precio){
             Toast.makeText(this,comprado,Toast.LENGTH_SHORT).show();
             dinerocount = dinerocount - precio;
-            txtdinero.setText("$"+dinerocount);
+            txtdinero.setText(dinerocount+"$");
         }else{
             Toast.makeText(this, rechazado, Toast.LENGTH_SHORT).show();
         }
@@ -430,7 +413,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return false;
         }
     }
+    public void GameOver(){
+        final AlertDialog.Builder alertaOpciones = new AlertDialog.Builder(MainActivity.this);
+        alertaOpciones.setTitle("OH NOOOOOO !!!!!!!!!!!!!!!!!");
+        alertaOpciones.setMessage("Chale como tu foraneo se murio solo tienes una opcion");
+        alertaOpciones.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Toast.makeText(MainActivity.this, "f", Toast.LENGTH_SHORT).show();
+            }
+        });
+        alertaOpciones.setPositiveButton("Reiniciar Foraneo", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "F", Toast.LENGTH_SHORT).show();
+                BaseDeDatos baseDeDatos = new BaseDeDatos(getApplicationContext());
+                baseDeDatos.eliminarStats(vidaPoints,felicidadPoints,hambrePoints);
+                isRunning0=true;
+                vidaPoints =100;
+                felicidadPoints =100;
+                hambrePoints =100;
+                foraneo.setImageResource(R.drawable.foraneoocho);
+                felcidadBar.setProgress(100);
+                vidaBar.setProgress(100);
+                hambreBar.setProgress(100);
+                dinerocount = 0;
 
+            }
+        });
+        alertaOpciones.show();
+    }
     @Override
     protected void onPause() {
         super.onPause();

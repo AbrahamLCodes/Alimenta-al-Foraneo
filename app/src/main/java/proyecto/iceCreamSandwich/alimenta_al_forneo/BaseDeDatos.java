@@ -1,14 +1,10 @@
-package com.mario.alimenta_al_forneo;
+package proyecto.iceCreamSandwich.alimenta_al_forneo;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.icu.text.CaseMap;
-import android.view.MenuItem;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;

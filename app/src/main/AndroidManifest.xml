@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activityDatos"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="proyecto.iceCreamSandwich.alimenta_al_forneo.ActivityDatos"></activity>
+        <activity android:name="proyecto.iceCreamSandwich.alimenta_al_forneo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

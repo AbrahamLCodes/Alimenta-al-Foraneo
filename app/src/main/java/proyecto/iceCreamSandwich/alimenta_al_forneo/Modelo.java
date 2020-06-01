@@ -1,9 +1,4 @@
-package com.mario.alimenta_al_forneo;
-
-import android.os.Bundle;
-import android.os.Message;
-import android.util.Log;
-import android.widget.Toast;
+package proyecto.iceCreamSandwich.alimenta_al_forneo;
 
 public class Modelo {
     int hambreProgress =10;

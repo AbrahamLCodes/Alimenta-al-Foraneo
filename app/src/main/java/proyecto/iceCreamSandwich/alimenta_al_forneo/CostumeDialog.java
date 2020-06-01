@@ -1,4 +1,4 @@
-package com.mario.alimenta_al_forneo;
+package proyecto.iceCreamSandwich.alimenta_al_forneo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,13 +8,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import com.mario.alimenta_al_forneo.R;
 
 
 public class CostumeDialog extends AppCompatDialogFragment  {
